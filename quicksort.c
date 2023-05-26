@@ -75,12 +75,11 @@ int main(int argc, char *argv[])
 
     start_time = omp_get_wtime();
 
-/* call quickSort  */
-/* The sorting is done in a parallel region */
+/* Parallel region */
 #pragma omp parallel
     {
-/* But we only want to sort the list once, so the first call
- * to quickSort is done only once thanks to the single parameter
+/* Ensure only 1 thread calls quickSort here
+ *  for initialization.
  */
 #pragma omp single
         quickSort(0, (size - 1));
